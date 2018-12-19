@@ -2,8 +2,9 @@
 // Created by wenjuxu on 2018/12/19.
 //
 
-#include "scope_guard.h"
+#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
+#include "scope_guard.h"
 
 TEST_CASE("Test scope guard", "[scope_guard]")
 {
