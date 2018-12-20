@@ -7,37 +7,37 @@ matrix:
   include:
     # gcc on linux
     - os: linux
-        addons:
-          apt:
-            sources:
-              - ubuntu-toolchain-r-test
-            packages:
-              - g++-7
-        env:
-          - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
     # gcc on osx
     - os: osx
-        osx_image: xcode8
-        env:
-          - MATRIX_EVAL="brew install gcc && CC=gcc-7 && CXX=g++-7"
+      osx_image: xcode8
+      env:
+        - MATRIX_EVAL="brew install gcc && CC=gcc-7 && CXX=g++-7"
 
     # clang on linux
     - os: linux
-        addons:
-          apt:
-            sources:
-              - llvm-toolchain-trusty-5.0
-            packages:
-              - clang-5.0
-        env:
-          - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      env:
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
     # clang on osx
     - os: osx
-        osx_image: xcode8
-        env:
-          - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+      osx_image: xcode8
+      env:
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
 before_script:
   - rm -rf build/
