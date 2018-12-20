@@ -77,6 +77,34 @@ TEST_CASE("Test success guard", "[success_guard]")
     }
 }
 
+TEST_CASE("Test defer on success", "[defer_on_success]")
+{
+    int x;
+
+    SECTION("On success")
+    {
+        {
+            x = -1;
+            DEFER_ON_SUCCESS(x = 42);
+        }
+        REQUIRE(x == 42);
+    }
+
+    SECTION("On exception")
+    {
+        try
+        {
+            x = -1;
+            DEFER_ON_SUCCESS(x = 42);
+            throw std::runtime_error("");
+        }
+        catch (...)
+        {
+            REQUIRE(x == -1);
+        }
+    }
+}
+
 TEST_CASE("Test exception guard", "[exception_guard]")
 {
     int x;
@@ -96,6 +124,34 @@ TEST_CASE("Test exception guard", "[exception_guard]")
         {
             x = -1;
             auto exception_guard = orange::ExceptionGuard([&] { x = 42; });
+            throw std::runtime_error("");
+        }
+        catch (...)
+        {
+            REQUIRE(x == 42);
+        }
+    }
+}
+
+TEST_CASE("Test defer on exception", "[defer_on_exception]")
+{
+    int x;
+
+    SECTION("On success")
+    {
+        {
+            x = -1;
+            DEFER_ON_EXCEPTION(x = 42);
+        }
+        REQUIRE(x == -1);
+    }
+
+    SECTION("On exception")
+    {
+        try
+        {
+            x = -1;
+            DEFER_ON_EXCEPTION(x = 42);
             throw std::runtime_error("");
         }
         catch (...)

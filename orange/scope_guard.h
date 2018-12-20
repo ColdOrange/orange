@@ -75,7 +75,14 @@ public:
     { }
 };
 
-#define DEFER(code) auto UNIQUE_NAME(scope_guard) = orange::ScopeGuard([&] { do { code; } while (0); });
+#define DEFER(code) \
+    auto UNIQUE_NAME(scope_guard) = orange::ScopeGuard([&] { do { code; } while (0); });
+
+#define DEFER_ON_SUCCESS(code) \
+    auto UNIQUE_NAME(success_guard) = orange::SuccessGuard([&] { do { code; } while (0); });
+
+#define DEFER_ON_EXCEPTION(code) \
+    auto UNIQUE_NAME(exception_guard) = orange::ExceptionGuard([&] { do { code; } while (0); });
 
 } // namespace orange
 
