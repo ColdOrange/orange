@@ -1,4 +1,4 @@
-# Orange
+# Orange [![Build Status](https://travis-ci.com/ColdOrange/orange.svg?branch=master)](https://travis-ci.com/ColdOrange/orange)
 
 > Each c++ programmer should have his own library.
 
